@@ -79,13 +79,80 @@ def delete_user(user_id: str):
    - **DELETE `/users/{user_id}`:** Elimina un usuario.
 
 
-
 ### 2. Diseño
+
+Se aplico los principios SOLID de la siguiente manera:
+
+Por ejemplo, el principio de Responsabilidad única:
+
+Los módulos lo manejan osea cada módulo (controllers, services, repositories):
+- En **controllers** ese módulo es el que se encarga de manejar las solicitudes HTTP.
+- En **services** ese módulo es el que maneja toda la lógica del negocio de administración de usuarios.
+- En **repositories** ese módulo se encarga de almacenar los datos.
+
+
+Tambien tenemos el principio de inversion de dependencias:
+
+- Se consiguio que no se dependiera directamente de las implementaciones como tal, sino que los controladores dependan de los servicios, éstos a su vez dependan de interfaces que en este caso vienen a ser los repositorios.
+
 
 ### 3. Pruebas
 
+#### **Pruebas del Proyecto**
+
+Las pruebas se encuentran en el directorio `tests`, donde se testea el comportamiento de los controladores, servicios y repositorios. Las pruebas se realizan utilizando `pytest` y están organizadas de la siguiente manera:
+
+#### **Archivos de prueba**
+- **`test_controller.py`**: Contiene las pruebas de los controladores que gestionan las rutas de la API.
+- **`test_service.py`**: Contiene las pruebas para la lógica de negocio dentro de los servicios.
+- **`test_repository.py`**: Contiene las pruebas para las interacciones con la base de datos o repositorios de datos.
+
+#### **Comando para ejecutar las pruebas**
+Para ejecutar todas las pruebas y su cobertura,se usa el siguiente comando:
+
+```bash
+pytest --cov=src --cov-report=term-missing
+```
+
+Si se desea ejecutar las pruebas en un archivo específico, puedes hacerlo con el siguiente comando:
+
+```bash
+pytest tests/test_controller.py
+```
+
+![](docs/test1.png)
+
+#### **Descripción de las pruebas**
+Las pruebas están estructuradas en casos de prueba que incluyen la creación, actualización, eliminación y obtención de usuarios. Algunas de las pruebas clave incluyen:
+
+- **Creación de un usuario (`test_create_user`)**: Verifica que un nuevo usuario puede ser creado correctamente.
+- **Obtención de un usuario por ID (`test_get_user`)**: Verifica que un usuario puede ser recuperado por su ID.
+- **Actualización de un usuario (`test_update_user_success`)**: Verifica que un usuario puede ser actualizado correctamente.
+- **Eliminación de un usuario (`test_delete_user`)**: Verifica que un usuario puede ser eliminado correctamente.
+- **Manejo de errores**: Las pruebas también incluyen casos donde se intenta acceder o modificar un usuario que no existe (`test_update_user_not_found`, `test_update_user_invalid_body`).
+
+### **Cobertura de las pruebas**
+Puedes verificar la cobertura de las pruebas usando la siguiente opción con `pytest`:
+
+```bash
+pytest --cov=src
+```
+
 ### 4. Métricas
 
+#### **Comando para calcular la complejidad ciclomática**
+Para calcular la complejidad ciclomática de los archivos de tu proyecto, puedes usar **Radon** con el siguiente comando:
+
+```bash
+radon cc src -a
+```
+
+Esto analizará los archivos en el directorio `src` y genera un informe con la complejidad ciclomática, con un valor promedio para todo el proyecto.
+
+![](docs/complejidad.png)
+
+ **Interpretación de la complejidad ciclomática**
+ Vemos que nos Sale A eso quiere decir que es de **baja complejidad**, es decir, El código es fácil de entender y mantener.
 
 
 

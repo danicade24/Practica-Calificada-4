@@ -1,31 +1,45 @@
 from fastapi import FastAPI, HTTPException
-import requests
 
 app = FastAPI()
 
-# Base de datos en memoria
-products = {}
+# Almacenamos los usuarios en un diccionario
+users = {}
 
-@app.get("/products")
-def get_products():
-    return products
+"""Implementamos los métodos CRUD para user_management"""
 
-@app.get("/products/{product_id}")
-def get_product(product_id: str):
-    product = products.get(product_id)
-    if product:
-        return product
-    raise HTTPException(status_code=404, detail="Product not found")
+# Listar todos los usuarios
+@app.get("/users")
+def get_users():
+    return {"users": users}  # Devuelve un diccionario con la clave de usuarios
 
-@app.post("/products")
-def create_product(product_id: str, name: str, user_id: str):
-    if product_id in products:
-        raise HTTPException(status_code=400, detail="Product already exists")
-    
-    # Verificar existencia de usuario en el servicio de gestión de usuarios
-    response = requests.get(f"http://user_management:8000/users/{user_id}")
-    if response.status_code != 200:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    products[product_id] = {"id": product_id, "name": name, "user_id": user_id}
-    return products[product_id]
+# Obtener usuario por ID
+@app.get("/users/{user_id}")
+def get_user(user_id: str):
+    user = users.get(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    return {"user": user}  # Devuelve un diccionario con la clave "user"
+
+# Crear usuario
+@app.post("/users")
+def create_user(user_id: str, name: str):
+    if user_id in users:  # Verifica si el usuario ya existe
+        raise HTTPException(status_code=400, detail="El usuario ya existe")
+    users[user_id] = {"id": user_id, "name": name}
+    return {"user": users[user_id]}
+
+# Actualizar usuario
+@app.put("/users/{user_id}")
+def update_user(user_id: str, name: str):
+    if user_id not in users:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    users[user_id]["name"] = name
+    return {"user": users[user_id]}
+
+# Eliminar usuario por ID
+@app.delete("/users/{user_id}")
+def delete_user(user_id: str):
+    if user_id not in users:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    del users[user_id]
+    return {"message": "Usuario eliminado"}

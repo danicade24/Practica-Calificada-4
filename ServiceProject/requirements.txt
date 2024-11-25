@@ -5,3 +5,4 @@ requests-mock
 radon
 fastapi
 uvicorn
+httpx
