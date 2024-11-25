@@ -1,0 +1,7 @@
+pytest
+pytest-cov
+requests
+requests-mock
+radon
+fastapi
+uvicorn
