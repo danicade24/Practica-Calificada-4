@@ -120,6 +120,7 @@ Si se desea ejecutar las pruebas en un archivo específico, puedes hacerlo con e
 pytest tests/test_controller.py
 ```
 
+#### **Cobertura de las pruebas**
 ![](docs/test1.png)
 
 #### **Descripción de las pruebas**
@@ -131,12 +132,7 @@ Las pruebas están estructuradas en casos de prueba que incluyen la creación, a
 - **Eliminación de un usuario (`test_delete_user`)**: Verifica que un usuario puede ser eliminado correctamente.
 - **Manejo de errores**: Las pruebas también incluyen casos donde se intenta acceder o modificar un usuario que no existe (`test_update_user_not_found`, `test_update_user_invalid_body`).
 
-### **Cobertura de las pruebas**
-Puedes verificar la cobertura de las pruebas usando la siguiente opción con `pytest`:
 
-```bash
-pytest --cov=src
-```
 
 ### 4. Métricas
 
@@ -180,8 +176,6 @@ Esto analizará los archivos en el directorio `src` y genera un informe con la c
 - **Promedio general del proyecto**: A (1.55)
 - La **complejidad ciclomática** de todo el proyecto es baja, lo cual sugiere que el código está bien estructurado y es fácil de mantener. La mayoría de las funciones tienen una complejidad de 1, lo que significa que cada una realiza una tarea sencilla y directa sin lógica compleja o condicionales anidadas.
 
-
-
 ### **Conclusión**
 La baja complejidad ciclomática en el proyecto es un nos da a entender de que el código es limpio y fácil de mantener. S
 
@@ -194,3 +188,6 @@ La baja complejidad ciclomática en el proyecto es un nos da a entender de que e
 ### 3. Pruebas
 
 ### 4. Métricas
+
+
+### Nota: El avance ha sido ejecutado todo el tiempo dentro de un devcontainer
