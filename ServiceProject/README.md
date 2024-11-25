@@ -154,7 +154,36 @@ Esto analizará los archivos en el directorio `src` y genera un informe con la c
  **Interpretación de la complejidad ciclomática**
  Vemos que nos Sale A eso quiere decir que es de **baja complejidad**, es decir, El código es fácil de entender y mantener.
 
+---
 
+
+1. **`src/controllers/user_controller.py`**
+   - Funciones: `get_user`, `create_user`, `update_user`, `delete_user`, `get_users`
+
+   
+   **Promedio de complejidad**: A (1.6667)
+
+2. **`src/repositories/user_repository.py`**
+   - Métodos: `UserRepository.update_user`, `UserRepository.__init__`, `UserRepository.get_all_users`, `UserRepository.get_user_by_id`, `UserRepository.create_user`, `UserRepository.delete_user`
+
+   **Promedio de complejidad**: A (1)
+
+3. **`src/services/user_service.py`**
+   - Métodos: `UserService.get_user`, `UserService.create_user`, `UserService.update_user`, `UserService.delete_user`, `UserService.get_users`, `UserService.__init__`
+
+
+   **Promedio de complejidad**: A (1)
+
+---
+
+#### **Análisis de la Complejidad Ciclomática**
+- **Promedio general del proyecto**: A (1.55)
+- La **complejidad ciclomática** de todo el proyecto es baja, lo cual sugiere que el código está bien estructurado y es fácil de mantener. La mayoría de las funciones tienen una complejidad de 1, lo que significa que cada una realiza una tarea sencilla y directa sin lógica compleja o condicionales anidadas.
+
+
+
+### **Conclusión**
+La baja complejidad ciclomática en el proyecto es un nos da a entender de que el código es limpio y fácil de mantener. S
 
 ## Proyecto 2: Catálogo de Productos
 
